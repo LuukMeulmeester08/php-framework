@@ -1,0 +1,19 @@
+paths:
+  - src
+  - app
+
+layers:
+  - name: Framework
+    collectors:
+      - type: className
+        regex: ^Framework\\
+
+  - name: App
+    collectors:
+      - type: className
+        regex: ^App\\
+
+ruleset:
+  App:
+    - Framework
+  Framework: []
