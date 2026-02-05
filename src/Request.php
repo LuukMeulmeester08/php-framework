@@ -9,11 +9,11 @@ public string $path;
 public array $queryParameters;
 public array $postParameters;
 
-public function  __construct(string $method, string $path, array $queryParameters, array $postParameters)
+public function  __construct()
 {
-    $this->method = $method;
-    $this->path = $path;
-    $this->queryParameters = $queryParameters;
-    $this->postParameters = $postParameters;
+    $this->method = $_SERVER['REQUEST_METHOD'];
+    $this->path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $this->queryParameters = $_GET;
+    $this->postParameters = $_POST;
 }
 }

@@ -1,17 +1,21 @@
 <?php
+
+use App\controllers\HomeController;
+use App\controllers\TaskController;
+use App\RouteProvider;
+use Framework\Request;
+use Framework\Response;
+use Framework\Kernel;
+use Framework\Router;
+
 require __DIR__ . '/../vendor/autoload.php';
 
-use framework\Request;
-use framework\Response;
-use framework\Kernel;
+$routeProvider = new RouteProvider();
+$router = new Router();;
+$kernel = new Kernel($router,fn (Router $router) => $routeProvider->register($router));
+$request = new Request();
 
-$request = new Request(
-    $_SERVER['REQUEST_METHOD'],
-    parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH),
-    $_GET,
-    $_POST
-);
 
-$kernel = new Kernel();
+
 $response = $kernel->handle($request);
-$response->echo();
+echo $response-> body;
